@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { useNavigate, Link } from 'react-router'
 import "../auth.form.scss"
 import { useAuth } from '../hooks/useAuth'
+import Loader from '../../interview/components/Loader'
 
 const Login = () => {
 
@@ -22,12 +23,12 @@ const Login = () => {
     }
 
     if(loading){
-        return (<main><h1>Loading.......</h1></main>)
+        return (<Loader/>)
     }
 
 
     return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-200">
+    <main className="min-h-screen flex items-center justify-center bg-linear-to-br from-white to-gray-200">
         <div className="w-full max-w-md p-10 rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-neutral-100">
             <div className="text-center mb-8">
                 <h1 className="text-3xl font-bold tracking-tight text-black mb-2">
