@@ -1,5 +1,12 @@
+# Environment variables
+Frontend/.env
+Backend/.env
 .env
-node_modules
+.env.*
+
+# Node modules
+Frontend/node_modules/
+Backend/node_modules/
 # Logs
 logs
 *.log
