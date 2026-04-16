@@ -128,5 +128,4 @@ ResumeReport/
 
 ## License
 
-This project is licensed under the ISC License.
 Chandan naik @2026
