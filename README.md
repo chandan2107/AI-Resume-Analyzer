@@ -128,4 +128,4 @@ ResumeReport/
 
 ## License
 
-Chandan naik @2026
+Chandan Naik @2026
