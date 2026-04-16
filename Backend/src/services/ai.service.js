@@ -2,6 +2,10 @@ const { GoogleGenAI } = require("@google/genai")
 const { z } = require("zod")
 const { zodToJsonSchema } = require("zod-to-json-schema")
 
+const ai = new GoogleGenAI({
+    apiKey: process.env.GOOGLE_GEMINI_API_KEY
+})
+
 
 const interviewReportSchema = z.object({
     matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job describe"),
@@ -29,9 +33,6 @@ const interviewReportSchema = z.object({
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
-    const ai = new GoogleGenAI({
-        apiKey: process.env.GOOGLE_GEMINI_API_KEY
-    })
 
     const prompt = `Generate an interview report for a candidate with the following details:
                         Resume: ${resume}
