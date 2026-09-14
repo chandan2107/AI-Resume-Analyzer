@@ -21,5 +21,15 @@ app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
 
+/* Global error handler — must be last, with 4 args */
+app.use((err, req, res, next) => {
+    console.error("[ERROR]", err)
+    const status = err.status || err.statusCode || 500
+    res.status(status).json({
+        message: err.message || "Internal server error"
+    })
+})
+
+
 
 module.exports = app

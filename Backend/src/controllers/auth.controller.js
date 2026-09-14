@@ -69,7 +69,17 @@ async function loginUserController(req, res) {
 
     const { email, password } = req.body
 
-    const user = await userModel.findOne({ email })
+    let user = await userModel.findOne({ email })
+
+    // If demo account and not yet seeded, create it automatically
+    if (!user && email === "demo@gmail.com" && password === "1234") {
+        const hash = await bcrypt.hash("1234", 10)
+        user = await userModel.create({
+            username: "demo_user",
+            email: "demo@gmail.com",
+            password: hash
+        })
+    }
 
     if (!user) {
         return res.status(400).json({
@@ -77,7 +87,14 @@ async function loginUserController(req, res) {
         })
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password)
+    let isPasswordValid = await bcrypt.compare(password, user.password)
+
+    // Ensure demo account password 1234 always works
+    if (!isPasswordValid && email === "demo@gmail.com" && password === "1234") {
+        user.password = await bcrypt.hash("1234", 10)
+        await user.save()
+        isPasswordValid = true
+    }
 
     if (!isPasswordValid) {
         return res.status(400).json({
